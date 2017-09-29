@@ -16,6 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from "angularfire2";
 import {AngularFireDatabaseModule} from "angularfire2/database";
+import { DatabaseProvider } from '../providers/database/database';
+import { UsersProvider } from '../providers/users/users';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
@@ -53,7 +55,10 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    UsersProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatabaseProvider,
+    UsersProvider
   ]
 })
 export class AppModule {}
