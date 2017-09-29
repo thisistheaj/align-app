@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {DatabaseProvider} from "../database/database";
 import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/database";
 import * as firebase from 'firebase';
+import {User} from "../../model/user";
 /*
   Generated class for the UsersProvider provider.
 
@@ -21,7 +22,7 @@ export class UsersProvider {
     return this.users;
   }
 
-  public addUser(user): firebase.Promise<void> {
+  public addUser(user: User): firebase.Promise<void> {
     return this.db.getObjectReference('users/' + user.uid).set(user);
   }
 }

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Log In</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="sendCancel()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item row>
+        <button col col-6 ion-button type="submit" [disabled]="!form.valid">
+          Log In
+        </button>
+        <button type="button" col col-6 ion-button (click)="signup()" [disabled]="!form.valid">
+          Sign Up
+        </button>
+      </ion-item>
+    </form>
+    <button ion-button (click)="logOut()">
+      Log Out
+    </button>
+    <button ion-button (click)="checkLoggedIn()">
+      Check
+    </button>
+  </ion-list>
+
+</ion-content>

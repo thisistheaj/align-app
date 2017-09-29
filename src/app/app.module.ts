@@ -18,6 +18,10 @@ import { AngularFireModule } from "angularfire2";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import { DatabaseProvider } from '../providers/database/database';
 import { UsersProvider } from '../providers/users/users';
+import { AuthProvider } from '../providers/auth/auth';
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {LoginModalComponent} from "../components/login-modal/login-modal";
+import {ComponentsModule} from "../components/components.module";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
@@ -34,7 +38,8 @@ export const firebaseConfig = {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,8 @@ export const firebaseConfig = {
     SwingModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +56,8 @@ export const firebaseConfig = {
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginModalComponent
   ],
   providers: [
     StatusBar,
@@ -58,7 +65,8 @@ export const firebaseConfig = {
     UsersProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
-    UsersProvider
+    UsersProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}
