@@ -14,6 +14,18 @@ import { SwingModule } from 'angular2-swing';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from "angularfire2";
+import {AngularFireDatabaseModule} from "angularfire2/database";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
+  authDomain: "followers-e0e8d.firebaseapp.com",
+  databaseURL: "https://followers-e0e8d.firebaseio.com",
+  projectId: "followers-e0e8d",
+  storageBucket: "followers-e0e8d.appspot.com",
+  messagingSenderId: "758989306245"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -26,7 +38,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     HttpModule,
     SwingModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
