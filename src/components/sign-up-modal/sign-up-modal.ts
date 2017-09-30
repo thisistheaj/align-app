@@ -37,7 +37,7 @@ export class SignUpModalComponent {
           u.skills = this.skills;
           this.usersPvdr.addUser(u);
         }
-        this.sendDone(); //return to page
+        this.sendDone(data.uid); //return to page
         sub.unsubscribe();
       });
     });
@@ -53,8 +53,8 @@ export class SignUpModalComponent {
     this.viewCtrl.dismiss()
   }
 
-  public sendDone() {
-    this.viewCtrl.dismiss()
+  public sendDone(uid: string) {
+    this.viewCtrl.dismiss({uid:uid})
   }
 
   public loggedIn(data){

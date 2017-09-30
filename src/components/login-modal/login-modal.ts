@@ -22,7 +22,7 @@ export class LoginModalComponent {
       password:["", Validators.compose([Validators.required,Validators.minLength(8)])]
     });
     this.authPvdr.addAuthCallback((data)=>{
-      this.sendDone();
+      this.sendDone(data.uid);
     })
   }
 
@@ -35,8 +35,8 @@ export class LoginModalComponent {
     this.viewCtrl.dismiss()
   }
 
-  public sendDone() {
-    this.viewCtrl.dismiss()
+  public sendDone(uid: string) {
+    this.viewCtrl.dismiss({uid:uid})
   }
 
   public loggedIn(data){

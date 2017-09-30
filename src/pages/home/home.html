@@ -19,7 +19,20 @@
       Need an account? Sign Up!
     </button>
   </div>
-  <h1 *ngIf="isLoggedIn()">
-    Logged in as {{ isLoggedIn().email }}
-  </h1>
+  <div *ngIf="isLoggedIn()">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Name</ion-label>
+        <ion-input type="text" [ngModel]='(userRef | async)?.name' (ngModelChange)="userRef.update({name: $event})"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Bio</ion-label>
+        <ion-textarea type="text" [ngModel]='(userRef | async)?.bio' (ngModelChange)="userRef.update({bio: $event})"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Skills: {{ (userRef | async)?.skills?.length }}</ion-label>
+        <ion-textarea [ngModel]='(userRef | async)?.skills.join(", ")' (ngModelChange)="parseTextArea($event)"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
