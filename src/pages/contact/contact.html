@@ -10,8 +10,9 @@
   <ion-list>
     <ion-list-header>Users</ion-list-header>
     <ion-item *ngFor="let user of users | async">
-      <ion-icon name="mail" item-left></ion-icon>
-      {{ user.email }}
+      <ion-icon name="person" item-left></ion-icon>
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.bio }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

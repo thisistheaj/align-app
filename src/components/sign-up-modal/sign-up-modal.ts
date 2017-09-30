@@ -17,20 +17,25 @@ import {User} from "../../model/user";
 })
 export class SignUpModalComponent {
   public form: FormGroup;
+  public skills: Array<string> = [];
+  public formSkillList: string;
 
   constructor(public viewCtrl: ViewController, public fb: FormBuilder,public authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
+
     this.form = fb.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password:["", Validators.compose([Validators.required,Validators.minLength(8)])],
       name:["", Validators.compose([Validators.required])],
       bio:["", Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(240)])],
     });
+
     this.authPvdr.addAuthCallback((data)=>{
       let u = new User(this.form.getRawValue());
       u.uid = data.uid;
+      u.skills = this.skills;
       this.usersPvdr.addUser(u);
       this.sendDone();
-    })
+    });
   }
 
   public signup(): void {
@@ -51,5 +56,10 @@ export class SignUpModalComponent {
       alert(data.message);
     }
   }
+
+  public parseTextArea() {
+    this.skills = this.formSkillList.split(", ");
+  }
+
 
 }

@@ -21,6 +21,10 @@
         <ion-textarea formControlName="bio" type="text"></ion-textarea>
       </ion-item>
       <ion-item>
+        <ion-label stacked>Skills: {{ skills.length }}</ion-label>
+        <ion-textarea [(ngModel)]="formSkillList" [ngModelOptions]="{standalone:true}" (ngModelChange)="parseTextArea()"></ion-textarea>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input formControlName="email" type="text"></ion-input>
       </ion-item>
