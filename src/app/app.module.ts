@@ -24,6 +24,7 @@ import {LoginModalComponent} from "../components/login-modal/login-modal";
 import {ComponentsModule} from "../components/components.module";
 import {SignUpModalComponent} from "../components/sign-up-modal/sign-up-modal";
 import { UUIDProvider } from '../providers/uuid/uuid';
+import {ProfileModalComponent} from "../components/profile-modal/profile-modal";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
@@ -42,7 +43,8 @@ export const firebaseConfig = {
     HomePage,
     TabsPage,
     LoginModalComponent,
-    SignUpModalComponent
+    SignUpModalComponent,
+    ProfileModalComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ export const firebaseConfig = {
     HomePage,
     TabsPage,
     LoginModalComponent,
-    SignUpModalComponent
+    SignUpModalComponent,
+    ProfileModalComponent
   ],
   providers: [
     StatusBar,

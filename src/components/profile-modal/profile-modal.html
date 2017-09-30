@@ -1,0 +1,28 @@
+<ion-card margin-top>
+  <ion-item>
+    <h2>
+      {{ (userRef | async)?.name }}
+    </h2>
+    <p>
+      {{ (userRef | async)?.email }}
+    </p>
+  </ion-item>
+  <ion-card-content>
+    <p>
+      {{ (userRef | async)?.bio }}
+    </p>
+  </ion-card-content>
+  <ion-card-content>
+    <p>
+      <span *ngFor="let skill of (userRef | async)?.skills">{{ skill }}</span>
+    </p>
+  </ion-card-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="sendCancel()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <div>back</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-card>
