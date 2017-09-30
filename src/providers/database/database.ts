@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/database";
+import * as firebase from 'firebase';
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -31,4 +32,19 @@ export class DatabaseProvider {
     let fullPath = DatabaseProvider.DBRoot + path;
     return path && !fullPath.endsWith('/');
   }
+
+  public getFile(path: string): firebase.Promise<any> {
+    let storageRef = firebase.storage().ref();
+    let fileRef = storageRef.child(path);
+    return fileRef.getDownloadURL()
+      .then(data => data, err => err);
+  }
+
+  public uploadFile(path:string, blob: string): firebase.Promise<any> {
+    let storageRef = firebase.storage().ref();
+    let fileRef = storageRef.child(path);
+    return fileRef.putString(blob, 'data_url')
+      .then(data => data, err => err);
+  }
+
 }

@@ -13,6 +13,13 @@
   <ion-list>
     <form [formGroup]="form" (ngSubmit)="signup()">
       <ion-item>
+        <ion-thumbnail item-start>
+          <img *ngIf="!imageUrl" src="assets/icon/favicon.ico">
+          <img *ngIf="imageUrl" [src]="imageUrl">
+        </ion-thumbnail>
+        <button ion-button type="button" (click)="changeImage()">Upload Profile Image</button>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Name</ion-label>
         <ion-input formControlName="name" type="text"></ion-input>
       </ion-item>

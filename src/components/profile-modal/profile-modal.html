@@ -1,5 +1,9 @@
 <ion-card margin-top>
   <ion-item>
+    <ion-icon *ngIf="!((userRef | async)?.imageUrl && ((userRef | async)?.imageUrl != ''))" name="person" item-left></ion-icon>
+    <ion-avatar *ngIf="(userRef | async)?.imageUrl && ((userRef | async)?.imageUrl != '')" item-start>
+      <img [src]="(userRef | async)?.imageUrl">
+    </ion-avatar>
     <h2>
       {{ (userRef | async)?.name }}
     </h2>

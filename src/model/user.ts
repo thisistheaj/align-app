@@ -6,6 +6,7 @@ export class User {
   public uid: string;
   public bio: string;
   public skills: Array<string>;
+  public imageUrl: string = "";
 
   constructor(obj: {email:string,name:string,bio:string}){
     this.uid = UUIDProvider.generateUUID();

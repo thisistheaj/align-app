@@ -4,6 +4,7 @@ import {ViewController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
 import {UsersProvider} from "../../providers/users/users";
 import {User} from "../../model/user";
+import {ImageProvider} from "../../providers/image/image";
 
 /**
  * Generated class for the SignUpModalComponent component.
@@ -19,8 +20,9 @@ export class SignUpModalComponent {
   public form: FormGroup;
   public skills: Array<string> = [];
   public formSkillList: string;
+  public imageUrl: string = '';
 
-  constructor(public viewCtrl: ViewController, public fb: FormBuilder,public authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
+  constructor(public viewCtrl: ViewController, public fb: FormBuilder,public authPvdr: AuthProvider, public usersPvdr: UsersProvider, public imagePvdr: ImageProvider) {
 
     this.form = fb.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -35,6 +37,7 @@ export class SignUpModalComponent {
           let u = new User(this.form.getRawValue());
           u.uid = data.uid;
           u.skills = this.skills;
+          u.imageUrl = this.imageUrl;
           this.usersPvdr.addUser(u);
         }
         this.sendDone(data.uid); //return to page
@@ -66,6 +69,17 @@ export class SignUpModalComponent {
   public parseTextArea() {
     this.skills = this.formSkillList.split(", ");
   }
+
+  public changeImage(){
+    this.imagePvdr.takePicture().then(image => {
+      console.log(image);
+      this.imagePvdr.uploadImage(image)
+        .then(imageUrl => {
+          this.imageUrl = imageUrl;
+        }, err => console.log(err));
+    }, err => console.error(err)).catch(err => console.log(err));
+  }
+
 
 
 }

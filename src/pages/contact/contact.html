@@ -10,7 +10,10 @@
   <ion-list>
     <ion-list-header>Users</ion-list-header>
     <button ion-item *ngFor="let user of users | async" (click)="presentProfileModal(user.uid)">
-      <ion-icon name="person" item-left></ion-icon>
+      <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
+      <ion-avatar *ngIf="user.imageUrl && ((user).imageUrl != '')" item-start>
+        <img [src]="user.imageUrl">
+      </ion-avatar>
       <h2>{{ user.name }}</h2>
       <p>{{ user.skills.join(", ") }}</p>
     </button>
