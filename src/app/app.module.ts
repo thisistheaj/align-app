@@ -23,6 +23,7 @@ import {AngularFireAuthModule} from "angularfire2/auth";
 import {LoginModalComponent} from "../components/login-modal/login-modal";
 import {ComponentsModule} from "../components/components.module";
 import {SignUpModalComponent} from "../components/sign-up-modal/sign-up-modal";
+import { UUIDProvider } from '../providers/uuid/uuid';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
@@ -69,7 +70,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     UsersProvider,
-    AuthProvider
+    AuthProvider,
+    UUIDProvider
   ]
 })
 export class AppModule {}

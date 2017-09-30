@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ViewController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
+import {UsersProvider} from "../../providers/users/users";
+import {User} from "../../model/user";
 
 /**
  * Generated class for the SignUpModalComponent component.
@@ -16,12 +18,17 @@ import {AuthProvider} from "../../providers/auth/auth";
 export class SignUpModalComponent {
   public form: FormGroup;
 
-  constructor(public viewCtrl: ViewController, public fb: FormBuilder,public authPvdr: AuthProvider) {
+  constructor(public viewCtrl: ViewController, public fb: FormBuilder,public authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
     this.form = fb.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
-      password:["", Validators.compose([Validators.required,Validators.minLength(8)])]
+      password:["", Validators.compose([Validators.required,Validators.minLength(8)])],
+      name:["", Validators.compose([Validators.required])],
+      bio:["", Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(240)])],
     });
     this.authPvdr.addAuthCallback((data)=>{
+      let u = new User(this.form.getRawValue());
+      u.uid = data.uid;
+      this.usersPvdr.addUser(u);
       this.sendDone();
     })
   }
