@@ -21,16 +21,19 @@ export class LoginModalComponent {
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password:["", Validators.compose([Validators.required,Validators.minLength(8)])]
     });
+    this.authPvdr.addAuthCallback((data)=>{
+      this.sendDone();
+    })
   }
 
   public login(): void {
     this.authPvdr.logInWithEmail(this.form.get('email').value, this.form.get('password').value)
-      .then(data => this.sendDone(), err => alert(err.message));
+      .then(data => this.loggedIn(data), err => alert(err.message));
   }
 
   public signup(): void {
-    this.authPvdr.logInWithEmail(this.form.get('email').value, this.form.get('password').value)
-      .then(data => this.sendDone(), err => alert(err.message));
+    this.authPvdr.signUpWithEmail(this.form.get('email').value, this.form.get('password').value)
+      .then(data => this.loggedIn(data), err => alert(err.message));
   }
 
   public logOut(){
@@ -42,7 +45,13 @@ export class LoginModalComponent {
   }
 
   public sendDone() {
-    alert('Logged in');
+    this.viewCtrl.dismiss()
+  }
+
+  public loggedIn(data){
+    if (data.message) { //check for error (does not go into err callback)
+      alert(data.message);
+    }
   }
 
   public checkLoggedIn(){
