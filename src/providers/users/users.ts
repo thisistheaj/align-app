@@ -22,6 +22,10 @@ export class UsersProvider {
     return this.users;
   }
 
+  public getUser(uid): FirebaseObjectObservable<any> {
+    return this.db.getObjectReference('users/' + uid);
+  }
+
   public addUser(user: User): firebase.Promise<void> {
     return this.db.getObjectReference('users/' + user.uid).set(user);
   }

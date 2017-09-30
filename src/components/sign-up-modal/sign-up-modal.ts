@@ -30,12 +30,18 @@ export class SignUpModalComponent {
     });
 
     this.authPvdr.addAuthCallback((data)=>{
-      let u = new User(this.form.getRawValue());
-      u.uid = data.uid;
-      u.skills = this.skills;
-      this.usersPvdr.addUser(u);
-      this.sendDone();
+      let sub = this.usersPvdr.getUser(data.uid).subscribe(user => {
+        if (!user.uid) { //check if user exists
+          let u = new User(this.form.getRawValue());
+          u.uid = data.uid;
+          u.skills = this.skills;
+          this.usersPvdr.addUser(u);
+        }
+        this.sendDone(); //return to page
+        sub.unsubscribe();
+      });
     });
+
   }
 
   public signup(): void {
