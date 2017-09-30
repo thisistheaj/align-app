@@ -1,16 +1,22 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Profile</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentLoginModal()">
-        <ion-icon name="person"></ion-icon>
+      <button *ngIf="isLoggedIn()" ion-button icon-only (click)="logOut()">
+        <ion-icon name="log-out" color="danger"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<button *ngIf="!isLoggedIn()" ion-button block (click)="presentLoginModal()">
-  Log In
-</button>
+  <div *ngIf="!isLoggedIn()">
+    <h4>You are not Logged In ...</h4>
+    <button ion-button block (click)="presentLoginModal()">
+      Have an account? Log In.
+    </button>
+    <button ion-button block (click)="presentLoginModal()">
+      Need an account? Sign Up!
+    </button>
+  </div>
 </ion-content>

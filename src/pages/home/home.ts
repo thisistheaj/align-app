@@ -21,4 +21,8 @@ export class HomePage {
   public isLoggedIn(){
    return this.authPvdr.isLoggedIn()
   }
+
+  public logOut() {
+    this.authPvdr.logOut();
+  }
 }
