@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ModalController, NavController} from 'ionic-angular';
 import {LoginModalComponent} from "../../components/login-modal/login-modal";
 import {AuthProvider} from "../../providers/auth/auth";
+import {SignUpModalComponent} from "../../components/sign-up-modal/sign-up-modal";
 
 @Component({
   selector: 'page-home',
@@ -15,6 +16,11 @@ export class HomePage {
 
   public presentLoginModal(){
     let modal = this.modalCtrl.create(LoginModalComponent);
+    modal.present();
+  }
+
+  public presentSignUpModal(){
+    let modal = this.modalCtrl.create(SignUpModalComponent);
     modal.present();
   }
 

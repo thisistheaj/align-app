@@ -5,13 +5,13 @@
         Cancel
       </button>
     </ion-buttons>
-    <ion-title>Log In</ion-title>
+    <ion-title>Sign Up</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <form [formGroup]="form" (ngSubmit)="login()">
+    <form [formGroup]="form" (ngSubmit)="signup()">
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input formControlName="email" type="text"></ion-input>
@@ -21,8 +21,8 @@
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
       <ion-item>
-        <button ion-button block type="submit" [disabled]="!form.valid">
-          Log In
+        <button type="submit" ion-button [disabled]="!form.valid">
+        Sign Up
         </button>
       </ion-item>
     </form>

@@ -15,8 +15,11 @@
     <button ion-button block (click)="presentLoginModal()">
       Have an account? Log In.
     </button>
-    <button ion-button block (click)="presentLoginModal()">
+    <button ion-button block (click)="presentSignUpModal()">
       Need an account? Sign Up!
     </button>
   </div>
+  <h1 *ngIf="isLoggedIn()">
+    Logged in as {{ isLoggedIn().email }}
+  </h1>
 </ion-content>

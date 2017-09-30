@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import {ViewController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ViewController} from "ionic-angular";
 import {AuthProvider} from "../../providers/auth/auth";
 
 /**
- * Generated class for the LoginModalComponent component.
+ * Generated class for the SignUpModalComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-  selector: 'login-modal',
-  templateUrl: 'login-modal.html'
+  selector: 'sign-up-modal',
+  templateUrl: 'sign-up-modal.html'
 })
-export class LoginModalComponent {
+export class SignUpModalComponent {
   public form: FormGroup;
 
   constructor(public viewCtrl: ViewController, public fb: FormBuilder,public authPvdr: AuthProvider) {
@@ -26,8 +26,8 @@ export class LoginModalComponent {
     })
   }
 
-  public login(): void {
-    this.authPvdr.logInWithEmail(this.form.get('email').value, this.form.get('password').value)
+  public signup(): void {
+    this.authPvdr.signUpWithEmail(this.form.get('email').value, this.form.get('password').value)
       .then(data => this.loggedIn(data), err => alert(err.message));
   }
 
@@ -44,4 +44,5 @@ export class LoginModalComponent {
       alert(data.message);
     }
   }
+
 }

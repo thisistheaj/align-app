@@ -22,6 +22,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {LoginModalComponent} from "../components/login-modal/login-modal";
 import {ComponentsModule} from "../components/components.module";
+import {SignUpModalComponent} from "../components/sign-up-modal/sign-up-modal";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
@@ -39,7 +40,8 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     TabsPage,
-    LoginModalComponent
+    LoginModalComponent,
+    SignUpModalComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     TabsPage,
-    LoginModalComponent
+    LoginModalComponent,
+    SignUpModalComponent
   ],
   providers: [
     StatusBar,
