@@ -42,7 +42,9 @@ export class HomePage {
   }
 
   public loadUser(params) {
-    this.userRef = this.usersPvdr.getUser(params.uid);
+    if (params) {
+      this.userRef = this.usersPvdr.getUser(params.uid);
+    }
   }
 
   public parseTextArea(evt) {
