@@ -8,8 +8,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Users</ion-list-header>
-    <button ion-item *ngFor="let user of users | async" (click)="presentProfileModal(user.uid)">
+    <local-searchbar
+      [items]="users | async"
+      (itemsFiltered)="onItemsFiltered($event)"
+      [fields]=" [ 'name','email' ] ">
+    </local-searchbar>
+    <button ion-item *ngFor="let user of filteredUsers" (click)="presentProfileModal(user.uid)">
       <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
       <ion-avatar *ngIf="user.imageUrl && ((user).imageUrl != '')" item-start>
         <img [src]="user.imageUrl">
