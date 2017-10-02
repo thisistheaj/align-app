@@ -23,10 +23,10 @@ export class AboutPage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
 
-  cards: Array<any>;
+  cards: Array<User>;
   stackConfig: StackConfig;
-  recentCard: string = '';
-  usersSnap: [User];
+  usersSnap: Array<User>;
+  currentUserSnap: User;
   foo = [];
 
   constructor(public navCtrl: NavController,public authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
@@ -42,12 +42,32 @@ export class AboutPage {
       }
     };
 
+    if (this.isLoggedIn().uid) {
+      this.usersPvdr.getUser(this.isLoggedIn().uid).subscribe(userSnap => {
+        this.currentUserSnap = userSnap;
+      })
+    }
+
     let sub = this.usersPvdr.getUsers().subscribe(usersSnap => {
-      this.usersSnap = usersSnap;
-      this.cards = [{email: ''}];
+      this.usersSnap = usersSnap.filter(u => {
+        if (!this.isLoggedIn()) {
+          return true;
+        } else if (u.uid == this.isLoggedIn().uid) {
+          return false;
+        }else if(!this.currentUserSnap.matches) {
+          return true;
+        } else if (this.currentUserSnap.matches[u.uid]) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      this.cards = [{email: '', name: '',imageUrl: null,matches:{}, uid:'', bio:'', skills: []}];
       this.addNewCards(1);
       sub.unsubscribe();
     });
+
+
   }
 
   ngAfterViewInit() {
@@ -114,7 +134,12 @@ export class AboutPage {
 
   public onLiked(user: User) {
     if (this.isLoggedIn()) {
-      alert("You liked " + user.name);
+      this.usersPvdr.likeUser(this.currentUserSnap, user, true).then(isMatch => {
+        console.log('match: ', isMatch);
+        if (isMatch) {
+          alert('You matched with: ' + user.name);
+        }
+      });
     } else {
       this.promptLogin();
     }
@@ -122,7 +147,8 @@ export class AboutPage {
 
   public onDisliked(user: User) {
     if (this.isLoggedIn()) {
-      alert("You disliked " + user.name);
+      // alert("You disliked " + user.name);
+      this.usersPvdr.likeUser(this.currentUserSnap, user, false).then(data => console.log('match: ', data));
     } else {
       this.promptLogin();
     }
