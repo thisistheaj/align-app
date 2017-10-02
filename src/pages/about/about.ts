@@ -11,6 +11,9 @@ import {
   DragEvent,
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
+import {UsersProvider} from "../../providers/users/users";
+import {User} from "../../model/user";
+import {AuthProvider} from "../../providers/auth/auth";
 
 @Component({
   selector: 'page-about',
@@ -23,8 +26,10 @@ export class AboutPage {
   cards: Array<any>;
   stackConfig: StackConfig;
   recentCard: string = '';
+  usersSnap: [User];
+  foo = [];
 
-  constructor(public navCtrl: NavController, private http: Http) {
+  constructor(public navCtrl: NavController,public authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -36,6 +41,13 @@ export class AboutPage {
         return 800;
       }
     };
+
+    let sub = this.usersPvdr.getUsers().subscribe(usersSnap => {
+      this.usersSnap = usersSnap;
+      this.cards = [{email: ''}];
+      this.addNewCards(1);
+      sub.unsubscribe();
+    });
   }
 
   ngAfterViewInit() {
@@ -43,9 +55,6 @@ export class AboutPage {
     this.swingStack.throwin.subscribe((event: DragEvent) => {
       event.target.style.background = '#ffffff';
     });
-
-    this.cards = [{email: ''}];
-    this.addNewCards(1);
   }
 
   // Called whenever we drag an element
@@ -70,21 +79,25 @@ export class AboutPage {
     let removedCard = this.cards.pop();
     this.addNewCards(1);
     if (like) {
-      this.recentCard = 'You liked: ' + removedCard.email;
+      this.onLiked(removedCard);
     } else {
-      this.recentCard = 'You disliked: ' + removedCard.email;
+      this.onDisliked(removedCard);
     }
   }
 
 // Add new cards to our array
   addNewCards(count: number) {
-    this.http.get('https://randomuser.me/api/?results=' + count)
-      .map(data => data.json().results)
-      .subscribe(result => {
-        for (let val of result) {
-          this.cards.push(val);
-        }
-      })
+    // this.http.get('https://randomuser.me/api/?results=' + count)
+    //   .map(data => data.json().results)
+    //   .subscribe(result => {
+    //     for (let val of result) {
+    //       this.cards.push(val);
+    //     }
+    //   });
+    if(this.usersSnap && this.usersSnap.length > 0) {
+      this.cards.push(this.usersSnap.pop());
+      console.log(this.cards);
+    }
   }
 
 // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
@@ -97,6 +110,33 @@ export class AboutPage {
     }
 
     return hex;
+  }
+
+  public onLiked(user: User) {
+    if (this.isLoggedIn()) {
+      alert("You liked " + user.name);
+    } else {
+      this.promptLogin();
+    }
+  }
+
+  public onDisliked(user: User) {
+    if (this.isLoggedIn()) {
+      alert("You disliked " + user.name);
+    } else {
+      this.promptLogin();
+    }
+  }
+
+  public isLoggedIn() {
+    // if (this.authPvdr.isLoggedIn()) {
+    //   this.userRef = this.usersPvdr.getUser(this.authPvdr.isLoggedIn().uid);
+    // }
+    return this.authPvdr.isLoggedIn();
+  }
+
+  public promptLogin() {
+    alert('Log in');
   }
 
 }
