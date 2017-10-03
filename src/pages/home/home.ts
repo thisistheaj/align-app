@@ -5,6 +5,7 @@ import {AuthProvider} from "../../providers/auth/auth";
 import {SignUpModalComponent} from "../../components/sign-up-modal/sign-up-modal";
 import {FirebaseObjectObservable} from "angularfire2/database";
 import {UsersProvider} from "../../providers/users/users";
+import {ImageProvider} from "../../providers/image/image";
 
 @Component({
   selector: 'page-home',
@@ -14,7 +15,7 @@ export class HomePage {
 
   public userRef: FirebaseObjectObservable<any>;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private authPvdr: AuthProvider, public usersPvdr: UsersProvider, public imagePvdr: ImageProvider) {
 
   }
 
@@ -51,6 +52,17 @@ export class HomePage {
 
   public parseTextArea(evt) {
     this.userRef.update({skills: evt.split(", ")});
+  }
+
+  public changeImage() {
+    this.imagePvdr.takePicture().then(image => {
+      this.imagePvdr.uploadImage(image).then(imageUrl => {
+        if (this.isLoggedIn() && this.isLoggedIn().uid) {
+          this.usersPvdr.changeUserImageUrl(this.isLoggedIn().uid,imageUrl)
+            .then(data => console.log('change image',data), err => console.error(err));
+        }
+      })
+    }, err => console.error(err.message));
   }
 
 }

@@ -30,6 +30,10 @@ export class UsersProvider {
     return this.db.getObjectReference('users/' + user.uid).set(user);
   }
 
+  public  changeUserImageUrl(uid: string,imageUrl: string) : firebase.Promise<void> {
+    return this.db.getObjectReference('users/' + uid).update({imageUrl: imageUrl});
+  }
+
   public likeUser(u1, u2, likes): firebase.Promise<boolean> {
     u1.likes = likes;
     u2.likes = likes;
