@@ -14,24 +14,26 @@
       (itemsFiltered)="onItemsFiltered($event)"
       [fields]=" [ 'name','email' ] ">
     </local-searchbar>
-    <button text-wrap ion-item *ngFor="let user of filteredUsers" detail-none>
-      <a (click)="presentProfileModal(user.uid)">
-        <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
-      </a>
-      <ion-avatar *ngIf="user.imageUrl && ((user).imageUrl != '')" item-start>
+    <span *ngFor="let user of filteredUsers">
+      <button text-wrap ion-item *ngIf="user.uid != currentUserSnap.uid" detail-none>
         <a (click)="presentProfileModal(user.uid)">
-          <img [src]="user.imageUrl">
+          <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
         </a>
-      </ion-avatar>
-      <h2>{{ user.name }}</h2>
-      <p>{{ user.skills.join(", ") }}</p>
-      <!--<button ion-button item-end icon-only clear>-->
-        <!--<ion-icon name="close-circle-outline"></ion-icon>-->
-      <!--</button>-->
-      <button ion-button item-end icon-only clear color="secondary"
-              *ngIf="user?.matches[currentUserSnap.uid]?.likes && currentUserSnap.matches[user.uid]?.likes">
-        <ion-icon name="checkmark-circle"></ion-icon>
+        <ion-avatar *ngIf="user.imageUrl && ((user).imageUrl != '')" item-start>
+          <a (click)="presentProfileModal(user.uid)">
+            <img [src]="user.imageUrl">
+          </a>
+        </ion-avatar>
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.skills.join(", ") }}</p>
+        <!--<button ion-button item-end icon-only clear>-->
+          <!--<ion-icon name="close-circle-outline"></ion-icon>-->
+        <!--</button>-->
+        <button ion-button item-end icon-only clear color="secondary"
+                *ngIf="user?.matches[currentUserSnap.uid]?.likes && currentUserSnap.matches[user.uid]?.likes">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </button>
       </button>
-    </button>
+    </span>
   </ion-list>
 </ion-content>
