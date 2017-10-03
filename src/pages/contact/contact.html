@@ -8,18 +8,30 @@
 
 <ion-content>
   <ion-list>
+
     <local-searchbar
       [items]="users | async"
       (itemsFiltered)="onItemsFiltered($event)"
       [fields]=" [ 'name','email' ] ">
     </local-searchbar>
-    <button ion-item *ngFor="let user of filteredUsers" (click)="presentProfileModal(user.uid)">
-      <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
+    <button text-wrap ion-item *ngFor="let user of filteredUsers" detail-none>
+      <a (click)="presentProfileModal(user.uid)">
+        <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
+      </a>
       <ion-avatar *ngIf="user.imageUrl && ((user).imageUrl != '')" item-start>
-        <img [src]="user.imageUrl">
+        <a (click)="presentProfileModal(user.uid)">
+          <img [src]="user.imageUrl">
+        </a>
       </ion-avatar>
       <h2>{{ user.name }}</h2>
       <p>{{ user.skills.join(", ") }}</p>
+      <!--<button ion-button item-end icon-only clear>-->
+        <!--<ion-icon name="close-circle-outline"></ion-icon>-->
+      <!--</button>-->
+      <button ion-button item-end icon-only clear color="secondary"
+              *ngIf="user?.matches[currentUserSnap.uid]?.likes && currentUserSnap.matches[user.uid]?.likes">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </button>
     </button>
   </ion-list>
 </ion-content>

@@ -4,6 +4,8 @@ import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/databa
 import {UsersProvider} from "../../providers/users/users";
 import {ProfileModalComponent} from "../../components/profile-modal/profile-modal";
 import {LocalSearchbarComponent} from "../../components/local-searchbar/local-searchbar";
+import {User} from "../../model/user";
+import {AuthProvider} from "../../providers/auth/auth";
 
 @Component({
   selector: 'page-contact',
@@ -13,13 +15,17 @@ export class ContactPage {
 
   public users: FirebaseListObservable<any>;
   public filteredUsers: any = [];
+  public currentUserSnap: User;
 
-  constructor(public navCtrl: NavController, public usersPvdr: UsersProvider, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public usersPvdr: UsersProvider, public modalCtrl: ModalController, public authPvdr: AuthProvider) {
     this.users = this.usersPvdr.getUsers();
     let sub = this.users.subscribe( data => {
       this.filteredUsers = data;
       sub.unsubscribe();
     });
+    this.usersPvdr.getUser(this.authPvdr.isLoggedIn().uid).subscribe(userSnap => {
+      this.currentUserSnap = userSnap;
+    })
   }
 
   public presentProfileModal(uid) {
