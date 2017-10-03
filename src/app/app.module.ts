@@ -28,6 +28,8 @@ import {ProfileModalComponent} from "../components/profile-modal/profile-modal";
 import { ImageProvider } from '../providers/image/image';
 import {Camera} from "@ionic-native/camera";
 import {LocalSearchbarComponent} from "../components/local-searchbar/local-searchbar";
+import {EventsPage} from "../pages/events/events";
+import {StartupsPage} from "../pages/startups/startups";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDIX9h1XPh3A84v_OrT35R4vANTTLj-zQg",
@@ -45,6 +47,8 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     TabsPage,
+    EventsPage,
+    StartupsPage,
     LoginModalComponent,
     SignUpModalComponent,
     ProfileModalComponent,
@@ -66,6 +70,8 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     TabsPage,
+    EventsPage,
+    StartupsPage,
     LoginModalComponent,
     SignUpModalComponent,
     ProfileModalComponent

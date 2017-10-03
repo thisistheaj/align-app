@@ -23,7 +23,7 @@ export class ContactPage {
       this.filteredUsers = data;
       // sub.unsubscribe();
     });
-    if (this.authPvdr.isLoggedIn()) {
+    if (this.authPvdr.isLoggedIn() && this.authPvdr.isLoggedIn().uid) {
       this.usersPvdr.getUser(this.authPvdr.isLoggedIn().uid).subscribe(userSnap => {
         this.currentUserSnap = userSnap;
       });
