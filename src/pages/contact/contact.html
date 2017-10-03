@@ -15,7 +15,7 @@
       [fields]=" [ 'name','email' ] ">
     </local-searchbar>
     <span *ngFor="let user of filteredUsers">
-      <button text-wrap ion-item *ngIf="user.uid != currentUserSnap.uid" detail-none (click)="presentProfileModal(user.uid)">
+      <button text-wrap ion-item *ngIf="user.uid != currentUserSnap?.uid" detail-none (click)="presentProfileModal(user.uid)">
           <ion-icon *ngIf="!(user.imageUrl && ((user).imageUrl != ''))" name="person" item-left></ion-icon>
         <ion-avatar *ngIf="user.imageUrl && ((user).imageUrl != '')" item-start>
             <img [src]="user.imageUrl">

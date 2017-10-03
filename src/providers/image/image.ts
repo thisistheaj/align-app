@@ -18,8 +18,10 @@ export class ImageProvider {
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     targetHeight: 500,
-    targetWidth: 500
+    targetWidth: 500,
+    allowEdit: true
   };
 
   // private currentUserId: string;

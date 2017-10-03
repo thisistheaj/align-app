@@ -23,9 +23,11 @@ export class ContactPage {
       this.filteredUsers = data;
       // sub.unsubscribe();
     });
-    this.usersPvdr.getUser(this.authPvdr.isLoggedIn().uid).subscribe(userSnap => {
-      this.currentUserSnap = userSnap;
-    })
+    if (this.authPvdr.isLoggedIn()) {
+      this.usersPvdr.getUser(this.authPvdr.isLoggedIn().uid).subscribe(userSnap => {
+        this.currentUserSnap = userSnap;
+      });
+    }
   }
 
   public presentProfileModal(uid) {
