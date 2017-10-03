@@ -21,7 +21,7 @@ export class ContactPage {
     this.users = this.usersPvdr.getUsers();
     let sub = this.users.subscribe( data => {
       this.filteredUsers = data;
-      sub.unsubscribe();
+      // sub.unsubscribe();
     });
     this.usersPvdr.getUser(this.authPvdr.isLoggedIn().uid).subscribe(userSnap => {
       this.currentUserSnap = userSnap;

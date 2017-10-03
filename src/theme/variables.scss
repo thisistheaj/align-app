@@ -33,13 +33,58 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+$dark: #222;
+$primary: #ffc107;
+$light: #f4f4f4;
+
 $colors: (
-  primary:    #488aff,
+  primary:    $primary,
   secondary:  #32db64,
   danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  light:      $light,
+  dark:       $dark
 );
+body {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  h1,h2,h3,h4,h5,h6{
+    font-weight: 200;
+  }
+}
+
+
+div.scroll-content {
+  background-color: $dark;
+  color: #ddd;
+  .item.item-block.item-ios {
+    background-color: lighten($dark, 2%);
+    color: #ddd;
+  }
+  .card.card-ios, .searchbar-ios {
+    background-color: lighten($dark, 5%);
+    color: #ddd;
+  }
+
+  .list-ios .item-block .item-inner,.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+    border-color: rgba(#ffc107,0.1);
+  }
+
+  .text-input.text-input-ios {
+    color: darken($light, 50%);
+  }
+}
+.toolbar-background.toolbar-background-ios {
+  background-color: darken($dark, 10%);
+  color: #dddddd;
+}
+.toolbar-title.toolbar-title-ios {
+  color: #dddddd;
+  font-weight: 200;
+}
+
+.tabs-ios .tabbar.show-tabbar {
+  background-color: darken($dark, 10%);
+}
+
 
 
 // App iOS Variables

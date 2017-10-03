@@ -42,7 +42,7 @@ export class AboutPage {
       }
     };
 
-    if (this.isLoggedIn().uid) {
+    if (this.isLoggedIn() && this.isLoggedIn().uid) {
       this.usersPvdr.getUser(this.isLoggedIn().uid).subscribe(userSnap => {
         this.currentUserSnap = userSnap;
       })
@@ -75,7 +75,7 @@ export class AboutPage {
   ngAfterViewInit() {
     // Either subscribe in controller or set in HTML
     this.swingStack.throwin.subscribe((event: DragEvent) => {
-      event.target.style.background = '#ffffff';
+      event.target.style.background = '#222222';
     });
   }
 
@@ -83,13 +83,13 @@ export class AboutPage {
   onItemMove(element, x, y, r) {
     var color = '';
     var abs = Math.abs(x);
-    let min = Math.trunc(Math.min(16*16 - abs, 16*16));
+    let min = Math.trunc(Math.min(abs, 16*16));
     let hexCode = this.decimalToHex(min, 2);
 
     if (x < 0) {
-      color = '#FF' + hexCode + hexCode;
+      color = '#' + hexCode + '00' + '00';
     } else {
-      color = '#' + hexCode + 'FF' + hexCode;
+      color = '#' + '00' + hexCode + '00';
     }
 
     element.style.background = color;
@@ -164,7 +164,7 @@ export class AboutPage {
   }
 
   public promptLogin() {
-    alert('Log in');
+    alert('Log in to match with users');
   }
 
 }
