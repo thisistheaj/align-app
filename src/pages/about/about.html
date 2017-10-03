@@ -27,7 +27,7 @@
         </p>
       </ion-card-content>
     </ion-card>
-    <ion-row *ngIf="isLoggedIn()">
+    <ion-row *ngIf="isLoggedIn() && cards?.length > 0">
       <ion-col>
         <button ion-button clear large icon-left color="danger" (click)="voteUp(false)">
           <ion-icon name="thumbs-down"></ion-icon>
@@ -55,5 +55,8 @@
         </button>
       </ion-col>
     </ion-row>
+    <div *ngIf="isLoggedIn() && cards?.length <= 0" padding text-center>
+      <h4>No more users near you ...</h4>
+    </div>
   </div>
 </ion-content>
