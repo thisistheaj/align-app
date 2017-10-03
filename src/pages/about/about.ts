@@ -54,7 +54,7 @@ export class AboutPage {
           return true;
         } else if (u.uid == this.isLoggedIn().uid) {
           return false;
-        }else if(!this.currentUserSnap.matches) {
+        } else if(!this.currentUserSnap.matches) {
           return true;
         } else if (this.currentUserSnap.matches[u.uid]) {
           return false;
@@ -62,9 +62,11 @@ export class AboutPage {
           return true;
         }
       });
-      this.cards = [{email: '', name: '',imageUrl: null,matches:{}, uid:'', bio:'', skills: []}];
+      this.cards = [
+        // {email: '', name: '',imageUrl: null,matches:{}, uid:'', bio:'', skills: []}
+        ];
       this.addNewCards(1);
-      sub.unsubscribe();
+      // sub.unsubscribe();
     });
 
 
