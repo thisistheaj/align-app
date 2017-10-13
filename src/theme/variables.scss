@@ -51,37 +51,58 @@ body {
   }
 }
 
+div.statusbar {
+  background-color: $dark;
+  color: $primary;
+}
 
 div.scroll-content {
   background-color: $dark;
   color: #ddd;
-  .item.item-block.item-ios {
+  .item.item-block {
     background-color: lighten($dark, 2%);
     color: #ddd;
   }
-  .card.card-ios, .searchbar-ios {
+
+  ion-card.card {
     background-color: lighten($dark, 5%);
     color: #ddd;
   }
 
-  .list-ios .item-block .item-inner,.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+  .list .item-block .item-inner,
+  .list > .item-block:last-child,
+  .list > .item-wrapper:last-child .item-block {
     border-color: rgba(#ffc107,0.1);
   }
 
   .text-input.text-input-ios {
     color: darken($light, 50%);
   }
+
+  .card-md h1, .card-md h2,
+  .card-md h3, .card-md h4,
+  .card-md h5, .card-md h6,
+  .card-md p {
+    color: #ddd;
+  }
+
+  .card-md p {
+    color: #666;
+  }
 }
-.toolbar-background.toolbar-background-ios {
+.toolbar-background.toolbar-background-ios,
+.toolbar-background.toolbar-background-md {
   background-color: darken($dark, 10%);
   color: #dddddd;
 }
-.toolbar-title.toolbar-title-ios {
+.toolbar-title.toolbar-title-ios,
+.toolbar-title.toolbar-title-md {
   color: #dddddd;
   font-weight: 200;
 }
 
-.tabs-ios .tabbar.show-tabbar {
+.tabs-ios .tabbar.show-tabbar,
+.tabs-md .tabbar.show-tabbar {
   background-color: darken($dark, 10%);
 }
 
