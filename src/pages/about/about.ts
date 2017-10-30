@@ -14,6 +14,7 @@ import {
 import {UsersProvider} from "../../providers/users/users";
 import {User} from "../../model/user";
 import {AuthProvider} from "../../providers/auth/auth";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 @Component({
   selector: 'page-about',
@@ -29,7 +30,12 @@ export class AboutPage {
   currentUserSnap: User;
   foo = [];
 
-  constructor(public navCtrl: NavController,public authPvdr: AuthProvider, public usersPvdr: UsersProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public authPvdr: AuthProvider,
+    public usersPvdr: UsersProvider,
+    public social: SocialSharing
+  ) {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -165,6 +171,16 @@ export class AboutPage {
 
   public promptLogin() {
     alert('Log in to match with users');
+  }
+
+  public shareProfile(user) :void {
+    // alert('Shared: ' + user.name);
+    this.social.share(
+      'I found somebody you should meet on align!',
+      'align',
+      null,
+      'https://align-81530.firebaseapp.com/?userId=' + user.uid
+    );
   }
 
 }
