@@ -6,6 +6,7 @@ import {SignUpModalComponent} from "../../components/sign-up-modal/sign-up-modal
 import {FirebaseObjectObservable} from "angularfire2/database";
 import {UsersProvider} from "../../providers/users/users";
 import {ImageProvider} from "../../providers/image/image";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 @Component({
   selector: 'page-home',
@@ -14,8 +15,16 @@ import {ImageProvider} from "../../providers/image/image";
 export class HomePage {
 
   public userRef: FirebaseObjectObservable<any>;
+  public userSnap: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private authPvdr: AuthProvider, public usersPvdr: UsersProvider, public imagePvdr: ImageProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    private authPvdr: AuthProvider,
+    public usersPvdr: UsersProvider,
+    public imagePvdr: ImageProvider,
+    public social: SocialSharing
+  ) {
 
   }
 
@@ -63,6 +72,21 @@ export class HomePage {
         }
       })
     }, err => console.error(err.message));
+  }
+
+  public shareProfile() :void {
+    if (!this.userSnap) {
+      this.userRef.subscribe(userSnap => {
+        this.userSnap = userSnap;
+      });
+    }
+    // alert('Shared: ' + this.userSnap.name);
+    this.social.share(
+      'Check out my profile on align!',
+      'align',
+      null,
+      'https://align-81530.firebaseapp.com/?userId=' + this.userSnap.uid
+    );
   }
 
 }

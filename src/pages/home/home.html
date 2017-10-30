@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons start>
+      <button *ngIf="isLoggedIn()" ion-button icon-only (click)="shareProfile()">
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button *ngIf="isLoggedIn()" ion-button icon-only (click)="logOut()">

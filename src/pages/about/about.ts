@@ -54,9 +54,9 @@ export class AboutPage {
           return true;
         } else if (u.uid == this.isLoggedIn().uid) {
           return false;
-        } else if(!this.currentUserSnap.matches) {
+        } else if(this.currentUserSnap && !this.currentUserSnap.matches) {
           return true;
-        } else if (this.currentUserSnap.matches[u.uid]) {
+        } else if (this.currentUserSnap && this.currentUserSnap.matches && this.currentUserSnap.matches[u.uid]) {
           return false;
         } else {
           return true;
